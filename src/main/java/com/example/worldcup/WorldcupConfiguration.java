@@ -10,7 +10,7 @@ public class WorldcupConfiguration {
     @Bean
     public Jaxb2Marshaller marshaller(){
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setContextPath("localhost._8000.worldcup");
+        jaxb2Marshaller.setContextPath("localhost._8080.worldcup");
         return jaxb2Marshaller;
     }
 

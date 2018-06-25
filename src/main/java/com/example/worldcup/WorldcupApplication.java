@@ -1,7 +1,9 @@
 package com.example.worldcup;
 
-import localhost._8000.worldcup.GetPlayerByNameResponse;
-import localhost._8000.worldcup.Player;
+
+import localhost._8080.worldcup.GetPlayerByCountryResponse;
+import localhost._8080.worldcup.GetPlayerByNameResponse;
+import localhost._8080.worldcup.Player;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,17 +19,33 @@ public class WorldcupApplication {
     @Bean
     CommandLineRunner runner(WorldcupConnector worldcupConnector){
         return args -> {
-            String playerName = "Eden Hazard";
+            String[] searchString = {"Lionel Messi", "Belgium"};
             if (args.length > 0){
-                playerName = args[0];
+                searchString[0] = args[0];
             }
-//            GetPlayerByNameRequest nameRequest = new GetPlayerByNameRequest();
-//            nameRequest.setName(playerName);
 
-            GetPlayerByNameResponse nameResponse = worldcupConnector.getPlayerByNameResponse(playerName);
+            GetPlayerByNameResponse nameResponse = worldcupConnector.getPlayerByNameResponse(searchString[0]);
             Player player = nameResponse.getPlayer();
-            System.out.println("Response received is...");
-            System.out.println("---->>>> " + player.toString());
+            System.err.println("Response received for " + searchString[0] + " request is...");
+            System.err.println("---->>>> " + player.getPlayerName());
+            System.err.println("---->>>> " + player.getDateOfBirth());
+            System.err.println("---->>>> " + player.getClubName());
+            System.err.println("---->>>> " + player.getCountry());
+            System.err.println("---->>>> " + player.getPosition());
+            System.err.println("---->>>> " + player.getHeight());
+            System.err.println("---->>>> " + player.getWeight());
+
+
+            GetPlayerByCountryResponse countryResponse = worldcupConnector.getPlayerByCountryResponse(searchString[1]);
+            Player player1 = countryResponse.getPlayer();
+            System.err.println("Response received for " + searchString[1] + " request is...");
+            System.err.println("---->>>> " + player1.getPlayerName());
+            System.err.println("---->>>> " + player1.getDateOfBirth());
+            System.err.println("---->>>> " + player1.getClubName());
+            System.err.println("---->>>> " + player1.getCountry());
+            System.err.println("---->>>> " + player1.getPosition());
+            System.err.println("---->>>> " + player1.getHeight());
+            System.err.println("---->>>> " + player1.getWeight());
         };
     }
 }
